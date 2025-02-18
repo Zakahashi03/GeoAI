@@ -5,6 +5,7 @@ Vi er 6 personer i gruppe 11.
 <<<<<<< HEAD
 alle møtte opp til timen idag
 lalalala
+Jeg møtte opp i dag.
 =======
 Hei jeg heter clovis
 >>>>>>> 358ddac0e8cb3456159387a7d13bd5c10f785dc5
