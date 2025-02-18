@@ -8,26 +8,64 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <style>
-        /* Størrelse på kartet */
+        /* Enkel styling for kartet */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
         #map {
             height: 500px;
-            width: 100%;
+            width: 80%;
+            margin: auto;
+            border: 2px solid #333;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Velkommen til Leaflet-kartet</h1>
-    <p>Dette er et interaktivt kart ved hjelp av Leaflet.</p>
+    <h1>Leaflet Interaktivt Kart</h1>
+    <p>Dette er et kart med Leaflet hvor vi legger til markører, sirkler og polygoner.</p>
 
     <div id="map"></div>
 
-    <!-- Link til ekstern JavaScript-fil -->
-    <script src="script.js"></script>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Initialiser Leaflet-kartet og sett visningspunkt til Kristiansand
+        var map = L.map('map').setView([58.146, 7.995], 13);
+
+        // Legg til OpenStreetMap-fliser som bakgrunnskart
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Legg til en markør i Kristiansand
+        L.marker([58.146, 7.995]).addTo(map)
+            .bindPopup('Kristiansand sentrum')
+            .openPopup();
+
+        // Legg til en rød sirkel i London
+        L.circle([51.508, -0.11], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(map);
+
+        // Legg til et polygon i London
+        L.polygon([
+            [51.509, -0.08],
+            [51.503, -0.06],
+            [51.51, -0.047]
+        ]).addTo(map);
+
+        // Logg til konsollen at kartet er lastet
+        console.log("Leaflet-kartet er lastet!");
+    </script>
 
 </body>
 </html>
