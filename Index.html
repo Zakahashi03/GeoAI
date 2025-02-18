@@ -48,20 +48,21 @@
             .bindPopup('Kristiansand sentrum')
             .openPopup();
 
-        // Legg til en rød sirkel i London
-        L.circle([51.508, -0.11], {
+       // Legg til en rød sirkel i Kristiansand, Agder
+       L.circle([58.146, 7.995], { // Koordinatene til Kristiansand
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.5,
             radius: 500
         }).addTo(map);
 
-        // Legg til et polygon i London
+       // Legg til et polygon i Kristiansand
         L.polygon([
-            [51.509, -0.08],
-            [51.503, -0.06],
-            [51.51, -0.047]
-        ]).addTo(map);
+            [58.146, 7.995],
+            [58.147, 7.996],
+            [58.148, 7.994]
+        ]).addTo(map)
+            .bindPopup('Et polygon i Kristiansand');
 
         // Logg til konsollen at kartet er lastet
         console.log("Leaflet-kartet er lastet!");
