@@ -94,16 +94,16 @@ Denne applikasjonen viser hvordan geografiske data kan brukes for å optimaliser
 
 
 #### 8.2 Figur (2)
-![Figur1](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
+![Figur2](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.00.png)
 
-*
+* Vi har valgt tre datasett som gir en helhetlig forståelse av beredskapsstrukturen i Agder. På dette bildet kan vi se jord- og flomaktsoner (svart), nødhavner (rødt) og tilfluktsrom (oransje). Disse elementene er viktige for å vurdere hvordan kommunene i Agder er rustet til å håndtere krisesituasjoner. I analysen vil vi undersøke hvordan disse områdene er fordelt, med fokus på tilgjengeligheten av nødhavner og tilfluktsrom. Vi vil også vurdere hvor stor  flom- og jordskredrisiko hver av kommunene som blir analysert har. Vi vil også gjennom denne analysen identifisere styrker og svakheter i den eksisterende beredskapsstrukturen i de forskjellige kommunene. 
 
 #### 8.3 Figur (3)
-![Figur1](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
+![Figur3](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.17.png)
 
-*
+* På dette bildet ser vi kommunen Flekkefjord. Sør for Flekkefjord er det nesten like mange nødhavner som tilfluktsrom, noe som indikerer en god balanse mellom tilgjengelige trygge steder. Videre kan vi observere at Flekkefjord ikke har en høy risiko for jord- og flomskred, noe som bidrar til et tryggere miljø for innbyggerne.
 
 #### 8.4 Figur (4)
-![Figur1](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
+![Figur4](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.32.png)
 
-*
+* På bildet ovenfor kan vi se tre ulike kommuner: Farsund, Lyngdal og Mandal. I disse kommunene har nødhavnene en klar dominans. Både i Farsund og Lyngdal finnes det bare ett tilfluktsrom i hver kommune, mens Mandal har flere tilfluktsrom tilgjengelig. Det er imidlertid viktig å merke seg at nord for Farsund og nordvest for Lyngdal er områdene ganske utsatt for jord- og flomskred
