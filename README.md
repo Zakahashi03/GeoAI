@@ -71,3 +71,6 @@ Denne applikasjonen viser hvordan geografiske data kan brukes for å optimaliser
             Implementering av bilder med forklaring -> steg for steg             
             *                                                      *
 
+            https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.00.png
+            
+
