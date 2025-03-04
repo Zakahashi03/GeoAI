@@ -79,4 +79,3 @@ http://localhost:3000
 
 ## 7. Konklusjon
 Denne applikasjonen viser hvordan geografiske data kan brukes for å optimalisere evakueringsruter under naturkatastrofer. Ved å kombinere åpne data, geospatiale verktøy og interaktiv visualisering, gir vi et nyttig verktøy for både innbyggere og beredskapsmyndigheter.
-
