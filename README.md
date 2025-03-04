@@ -92,7 +92,6 @@ Denne applikasjonen viser hvordan geografiske data kan brukes for å optimaliser
 
 * Kartet over Kristiansand viser at det er en betydelig dominans av tilfluktsrom (oransje) sammenlignet med nødhavner (røde). Totalt finnes det fem nødhavner i området, mens antallet tilfluktsrom er mer enn fire ganger høyere. Dette indikerer en god beredskap for å gi innbyggerne trygge steder under kriser. Videre viser kartet at Kristiansand kommune generelt har lav risiko for jord- og flomskred, imidlertid er enkelte områder, hovedsakelig nær sentrum, mer utsatt for flom. Disse observasjonene viser viktigheten av å være oppmerksom på potensielle risikoer i ulike deler av kommunen for å sikre et godt tilpasset beredskapsplan i fremtiden. 
 
-
 #### 8.2 Figur (2)
 ![Figur2](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.00.png)
 
@@ -107,3 +106,8 @@ Denne applikasjonen viser hvordan geografiske data kan brukes for å optimaliser
 ![Figur4](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.32.png)
 
 * På bildet ovenfor kan vi se tre ulike kommuner: Farsund, Lyngdal og Mandal. I disse kommunene har nødhavnene en klar dominans. Både i Farsund og Lyngdal finnes det bare ett tilfluktsrom i hver kommune, mens Mandal har flere tilfluktsrom tilgjengelig. Det er imidlertid viktig å merke seg at nord for Farsund og nordvest for Lyngdal er områdene ganske utsatt for jord- og flomskred
+ 
+
+## 9. Refleksjon
+
+* Vår problemstilling er hvordan vi kan finne ut av optimale evakueringsruter i tilfelle en naturkatastrofe som (jordskjelv, flom, skogbrann) skjer. For å sikre en trygg og effektiv evakuering i tilfelle en naturkatastrofe, er det viktig å benytte hovedveiene som primære fluktveier. Hovedveiene er ofte bedre vedlikeholdt, har høyere kapasitet og er mindre utsatt for ras sammenlignet med mindre veier og stier. I områder med høy risiko for jord- og flomskred bør alternative ruter være kartlagt på forhånd, slik at innbyggerne har flere valgmuligheter dersom en vei blir sperret. I tillegg bør nødhavner og tilfluktsrom være lett tilgjengelige og godt skiltet, slik at evakuerte raskt kan finne trygghet. Kommunene bør også sørge for at kritisk infrastruktur, som broer og tunneler er i god stand for å forhindre flaskehalser under evakuering. Videre kan teknologi som GPS-baserte evakueringsruter og sanntidsoppdateringer om veiforhold bidra til mer effektive fluktruter. En koordinert beredskapsplan mellom kommuner og nødetater vil også sikre en raskere og mer strukturert respons i en krisesituasjon.
