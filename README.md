@@ -87,3 +87,18 @@ Denne applikasjonen viser hvordan geografiske data kan brukes for å optimaliser
                     Liste med figurer av kart-oppgaver 
                 *                                       *
 
+#### 8.1 Figur (1)
+  *  ![lalala](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
+
+
+#### 8.2 Figur (2)
+  *
+
+
+#### 8.3 Figur (3)
+  *
+
+
+#### 8.4 Figur (4)
+  *
+
