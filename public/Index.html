@@ -27,45 +27,58 @@
 <body>
 
     <h1>Leaflet Interaktivt Kart</h1>
-    <p>Dette er et kart med Leaflet hvor vi legger til markører, sirkler og polygoner.</p>
+    <p>Dette er et kart med Leaflet hvor vi legger til markører.</p>
 
     <div id="map"></div>
 
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script>
+    <!-- Supabase SDK -->
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+        // Sett opp Supabase-klienten
+        const supabaseUrl = 'https://uwkquwgqyotumepbwule.supabase.co';  // Bytt ut med din URL
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3a3F1d2dxeW90dW1lcGJ3dWxlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNzQ5MTgsImV4cCI6MjA1NDk1MDkxOH0.yGAsmLmdOvSDZERufGPtRmYl4ExYJcWhVIskOaxsFTk'; // Bytt ut med din anon key
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
         // Initialiser Leaflet-kartet og sett visningspunkt til Kristiansand
-        var map = L.map('map').setView([58.146, 7.995], 13);
+        const map = L.map('map').setView([58.146, 7.995], 10);
 
         // Legg til OpenStreetMap-fliser som bakgrunnskart
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Legg til en markør i Kristiansand
-        L.marker([58.146, 7.995]).addTo(map)
-            .bindPopup('Kristiansand sentrum')
-            .openPopup();
+        // Funksjon for å hente tilfluktsrom fra Supabase og legge dem til på kartet
+        async function loadTilfluktsrom() {
+            const { data, error } = await supabase
+                .from('tilfluktsrom')  // Pass på at tabellnavnet stemmer!
+                .select('adresse, latitude, longitude');
 
-       // Legg til en rød sirkel i Kristiansand, Agder
-       L.circle([58.146, 7.995], { // Koordinatene til Kristiansand
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: 500
-        }).addTo(map);
+            if (error) {
+                console.error("Feil ved henting av data fra Supabase:", error);
+                return;
+            }
 
-       // Legg til et polygon i Kristiansand
-        L.polygon([
-            [58.146, 7.995],
-            [58.147, 7.996],
-            [58.148, 7.994]
-        ]).addTo(map)
-            .bindPopup('Et polygon i Kristiansand');
+            console.log("Tilfluktsrom hentet fra Supabase:", data);
 
-        // Logg til konsollen at kartet er lastet
-        console.log("Leaflet-kartet er lastet!");
+            // Legg til markører på kartet
+            data.forEach(tilfluktsrom => {
+                if (tilfluktsrom.latitude && tilfluktsrom.longitude) {
+
+                    L.marker([tilfluktsrom.latitude, tilfluktsrom.longitude])
+                        .addTo(map)
+                        .bindPopup(`<b>${tilfluktsrom.adresse}</b>`);
+                }
+            });
+
+            //var marker = L.marker([51.5, -0.09]).addTo(map);
+        }
+
+        // Kjør funksjonen for å hente og vise tilfluktsrom
+        loadTilfluktsrom();
     </script>
 
 </body>
