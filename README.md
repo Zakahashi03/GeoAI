@@ -66,3 +66,5 @@ Disse datasettene er behandlet i QGIS og lastet opp til Supabase med PostGIS for
 
 7.KONKLUSJON
 Denne applikasjonen viser hvordan geografiske data kan brukes for å optimalisere evakueringsruter under naturkatastrofer. Ved å kombinere åpne data, geospatiale verktøy og interaktiv visualisering, gir vi et nyttig verktøy for både innbyggere og beredskapsmyndigheter.
+
+Implementering av bilder med forklaring  steg for steg
