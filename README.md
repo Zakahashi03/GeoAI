@@ -88,17 +88,22 @@ Denne applikasjonen viser hvordan geografiske data kan brukes for å optimaliser
                 *                                       *
 
 #### 8.1 Figur (1)
-  *  ![lalala](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
+  *  ![Figur1](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
+
+         * Kartet over Kristiansand viser at det er en betydelig dominans av tilfluktsrom (oransje) sammenlignet med nødhavner (røde). Totalt finnes det fem nødhavner i området, mens antallet tilfluktsrom er mer enn fire ganger høyere. Dette indikerer en god beredskap for å gi innbyggerne trygge steder under kriser. Videre viser kartet at Kristiansand kommune generelt har lav risiko for jord- og flomskred, imidlertid er enkelte områder, hovedsakelig nær sentrum, mer utsatt for flom. Disse observasjonene viser viktigheten av å være oppmerksom på potensielle risikoer i ulike deler av kommunen for å sikre et godt tilpasset beredskapsplan i fremtiden. 
 
 
 #### 8.2 Figur (2)
-  *
+  *  ![Figur1](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
 
+         *
 
 #### 8.3 Figur (3)
-  *
+  *  ![Figur1](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
 
+         *
 
 #### 8.4 Figur (4)
-  *
+  *  ![Figur1](https://github.com/Zakahashi03/GeoAI/blob/main/IMAGES/Skjermbilde%202025-03-04%20kl.%2012.33.44.png)
 
+         *
