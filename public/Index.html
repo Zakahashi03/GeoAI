@@ -34,51 +34,42 @@
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- Supabase SDK -->
     <script type="module">
         import { createClient } from 'https://esm.sh/@supabase/supabase-js'
-
-        // Sett opp Supabase-klienten
-        const supabaseUrl = 'https://uwkquwgqyotumepbwule.supabase.co';  // Bytt ut med din URL
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3a3F1d2dxeW90dW1lcGJ3dWxlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNzQ5MTgsImV4cCI6MjA1NDk1MDkxOH0.yGAsmLmdOvSDZERufGPtRmYl4ExYJcWhVIskOaxsFTk'; // Bytt ut med din anon key
+    
+        // Supabase oppsett
+        const supabaseUrl = 'https://uwkquwgqyotumepbwule.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3a3F1d2dxeW90dW1lcGJ3dWxlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNzQ5MTgsImV4cCI6MjA1NDk1MDkxOH0.yGAsmLmdOvSDZERufGPtRmYl4ExYJcWhVIskOaxsFTk'; 
         const supabase = createClient(supabaseUrl, supabaseKey);
-
-        // Initialiser Leaflet-kartet og sett visningspunkt til Kristiansand
-        const map = L.map('map').setView([58.146, 7.995], 10);
-
-        // Legg til OpenStreetMap-fliser som bakgrunnskart
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+    
+        // Lag kartet
+        var map = L.map('map').setView([60.472, 8.4689], 5); // Midt i Norge kanskje?
+    
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors'
         }).addTo(map);
-
-        // Funksjon for å hente tilfluktsrom fra Supabase og legge dem til på kartet
-        async function loadTilfluktsrom() {
+    
+        // Funksjon for å hente data og legge til markører
+        async function hentOgPlasserMarkorer() {
             const { data, error } = await supabase
-                .from('tilfluktsrom')  // Pass på at tabellnavnet stemmer!
-                .select('adresse, latitude, longitude');
-
+                .from('nodhavn')  // <-- Endre til navnet på tabellen din
+                .select('id, navn, nødhavnnummer, kategori, kommune, kommune, fylke, longitude, latitude, opphav, datauttaksdato'); // <-- Endre feltene til hva du har
+    
             if (error) {
-                console.error("Feil ved henting av data fra Supabase:", error);
+                console.error('Feil ved henting av data:', error);
                 return;
             }
-
-            console.log("Tilfluktsrom hentet fra Supabase:", data);
-
-            // Legg til markører på kartet
-            data.forEach(tilfluktsrom => {
-                if (tilfluktsrom.latitude && tilfluktsrom.longitude) {
-
-                    L.marker([tilfluktsrom.latitude, tilfluktsrom.longitude])
+    
+            data.forEach((plassering) => {
+                if (plassering.latitude && plassering.longitude) {
+                    L.marker([plassering.latitude, plassering.longitude])
                         .addTo(map)
-                        .bindPopup(`<b>${tilfluktsrom.adresse}</b>`);
+                        .bindPopup(plassering.navn || "Ingen navn");
                 }
             });
-
-            //var marker = L.marker([51.5, -0.09]).addTo(map);
         }
-
-        // Kjør funksjonen for å hente og vise tilfluktsrom
-        loadTilfluktsrom();
+    
+        hentOgPlasserMarkorer(); // Kjør funksjonen!
     </script>
 
 </body>

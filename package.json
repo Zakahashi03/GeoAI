@@ -2,10 +2,10 @@
   "name": "geoai",
   "version": "1.0.0",
   "description": "Dette er en github repository for gruppe 11 Vår første innlevering i faget er levert. Vi er 6 personer i gruppe 11.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js"
+    "test": "node app.js",
+    "dev": "node app.js"
   },
   "repository": {
     "type": "git",
