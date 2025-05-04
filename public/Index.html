@@ -1,76 +1,265 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaflet Kart</title>
-    
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <style>
-        /* Enkel styling for kartet */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            text-align: center;
-        }
-        #map {
-            height: 500px;
-            width: 80%;
-            margin: auto;
-            border: 2px solid #333;
-            border-radius: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaflet Kart</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="gisstyle.css" />
 </head>
 <body>
+  <!-- Title Section -->
+  <div class="title-container">
+    <h1>Leaflet Kart</h1>
+  </div>
 
-    <h1>Leaflet Interaktivt Kart</h1>
-    <p>Dette er et kart med Leaflet hvor vi legger til markører.</p>
+  <div class="container">
+    <!-- Left Section -->
+    <div class="left-section">
+      <div class="kontroller">
+        <p>Trykk på datasettene du vil vise/skjule</p>
+        <button id="tilfluktsromKnapp">Vis tilfluktsrom</button>
+        <button id="nodhavnKnapp">Vis nødhavn</button>
+        <button id="flomfareKnapp">Vis flomfare i Agder</button>
 
-    <div id="map"></div>
+        <!-- New Section for Snarveier -->
+        <p>Snarveier</p>
+        <button id="naermesteTilfluktsromKnapp">Nærmeste tilfluktsrom</button>
+        <button id="naermesteNodhavnKnapp">Nærmeste nødhavn</button>
+      </div>
 
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <div id="map"></div>
+    </div>
 
-    <script type="module">
-        import { createClient } from 'https://esm.sh/@supabase/supabase-js'
-    
-        // Supabase oppsett
-        const supabaseUrl = 'https://uwkquwgqyotumepbwule.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3a3F1d2dxeW90dW1lcGJ3dWxlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNzQ5MTgsImV4cCI6MjA1NDk1MDkxOH0.yGAsmLmdOvSDZERufGPtRmYl4ExYJcWhVIskOaxsFTk'; 
-        const supabase = createClient(supabaseUrl, supabaseKey);
-    
-        // Lag kartet
-        var map = L.map('map').setView([60.472, 8.4689], 5); // Midt i Norge kanskje?
-    
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors'
-        }).addTo(map);
-    
-        // Funksjon for å hente data og legge til markører
-        async function hentOgPlasserMarkorer() {
-            const { data, error } = await supabase
-                .from('nodhavn')  // <-- Endre til navnet på tabellen din
-                .select('id, navn, nødhavnnummer, kategori, kommune, kommune, fylke, longitude, latitude, opphav, datauttaksdato'); // <-- Endre feltene til hva du har
-    
-            if (error) {
-                console.error('Feil ved henting av data:', error);
-                return;
-            }
-    
-            data.forEach((plassering) => {
-                if (plassering.latitude && plassering.longitude) {
-                    L.marker([plassering.latitude, plassering.longitude])
-                        .addTo(map)
-                        .bindPopup(plassering.navn || "Ingen navn");
-                }
+    <!-- Right Section -->
+    <div class="right-section">
+      <div class="map-info">
+        <h3>Om Kartet</h3>
+        <p>
+          Dette interaktive kartet gir deg tilgang til viktige data i Agder-regionen. Du kan vise og skjule datasett som tilfluktsrom, nødhavner og flomfareområder ved hjelp av knappene til venstre. 
+          Markørene på kartet har følgende farger:
+          <ul>
+            <li><strong>Blå:</strong> Tilfluktsrom</li>
+            <li><strong>Grønn:</strong> Nødhavn</li>
+            <li><strong>Oransj:</strong> Flomfareområder</li>
+            <li><strong>Rød:</strong> Din nåværende posisjon</li>
+          </ul>
+          De to nederste knappene, "Nærmeste tilfluktsrom" fører deg til nærmeste tilfluktsrom og "Nærmeste nødhavn", fører deg til nærmeste nødhavn fra din posisjon i Google Maps. For at disse knappene skal fungere, må de tilhørende markørene være synlige på kartet.
+        </p>
+        <h3>Kreditering</h3>
+        <p>
+          Kartdata er levert av OpenStreetMap og Supabase. Utviklingen av denne applikasjonen er et samarbeid mellom Mahsa, Zakariyaa, Clovis, Yousef, Kansika og Tahir. For spørsmål eller tilbakemeldinger, vennligst ta kontakt med oss. Vi setter pris på din tilbakemelding!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2023 Kartapplikasjon. Alle rettigheter reservert.</p>
+    <p>Utviklet av Mahsa, Zakariyaa, Clovis, Yousef, Kansika og Tahir</p>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js';
+
+    const supabase = createClient(
+      'https://uwkquwgqyotumepbwule.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3a3F1d2dxeW90dW1lcGJ3dWxlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNzQ5MTgsImV4cCI6MjA1NDk1MDkxOH0.yGAsmLmdOvSDZERufGPtRmYl4ExYJcWhVIskOaxsFTk'
+    );
+
+    const map = L.map('map').setView([60.472, 8.4689], 5);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const farger = {
+      bruker: 'red',
+      tilfluktsrom: 'blue',
+      nodhavn: 'green',
+      flomfare: 'orange'
+    };
+
+    function lagIkon(farge) {
+      return L.icon({
+        iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${farge}.png`,
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+    }
+
+    // Variable to store the user's current position
+    let brukerPosisjon = null;
+
+    // Update visBrukerposisjon to store the user's coordinates
+    function visBrukerposisjon() {
+      map.locate({ setView: true, maxZoom: 13 });
+      map.on('locationfound', (e) => {
+        brukerPosisjon = e.latlng; // Store the user's position
+        L.marker(e.latlng, { icon: lagIkon(farger.bruker) })
+          .addTo(map)
+          .bindPopup('Du er her')
+          .openPopup();
+      });
+      map.on('locationerror', () => {
+        alert("Kunne ikke finne brukerposisjon.");
+        map.setView([60.472, 8.4689], 5);
+      });
+    }
+
+    visBrukerposisjon();
+
+    function opprettLagToggler({ knappId, tabellnavn, popupFelt, farge, lagring }) {
+      let vises = false;
+
+      document.getElementById(knappId).addEventListener('click', async () => {
+        const btn = document.getElementById(knappId);
+
+        if (!vises) {
+          const { data, error } = await supabase.from(tabellnavn).select("*");
+          if (error) {
+            console.error(`Feil ved henting av ${tabellnavn}:`, error);
+            return;
+          }
+
+          lagring.length = 0;
+          data.filter(p => p.latitude && p.longitude).forEach(p => {
+            const popupTekst = p[popupFelt] || `Ukjent ${popupFelt}`;
+            const marker = L.marker([p.latitude, p.longitude], { icon: lagIkon(farge) })
+              .addTo(map)
+              .bindPopup(popupTekst);
+
+            // Add click event to open Google Maps with directions
+            marker.on('click', () => {
+              if (brukerPosisjon) {
+                const { lat, lng } = brukerPosisjon;
+                const destinationLat = p.latitude;
+                const destinationLng = p.longitude;
+                const googleMapsUrl = `https://www.google.com/maps/dir/${lat},${lng}/${destinationLat},${destinationLng}`;
+                window.open(googleMapsUrl, '_blank');
+              } else {
+                alert("Brukerposisjon er ikke tilgjengelig.");
+              }
             });
-        }
-    
-        hentOgPlasserMarkorer(); // Kjør funksjonen!
-    </script>
 
+            lagring.push(marker);
+          });
+
+          btn.textContent = `Skjul ${tabellnavn}`;
+          vises = true;
+        } else {
+          lagring.forEach(m => map.removeLayer(m));
+          lagring.length = 0;
+          btn.textContent = `Vis ${tabellnavn}`;
+          vises = false;
+        }
+      });
+    }
+
+    const tilfluktsromMarkorer = [];
+    const nodhavnMarkorer = [];
+
+    opprettLagToggler({
+      knappId: "tilfluktsromKnapp",
+      tabellnavn: "tilfluktsrom",
+      popupFelt: "adresse",
+      farge: farger.tilfluktsrom,
+      lagring: tilfluktsromMarkorer
+    });
+
+    opprettLagToggler({
+      knappId: "nodhavnKnapp",
+      tabellnavn: "nodhavn",
+      popupFelt: "navn",
+      farge: farger.nodhavn,
+      lagring: nodhavnMarkorer
+    });
+
+    // Flomfare krever egen behandling pga. GeoJSON
+    let flomfareVises = false;
+    let flomfareLag = [];
+
+    document.getElementById("flomfareKnapp").addEventListener("click", async () => {
+      const btn = document.getElementById("flomfareKnapp");
+
+      if (!flomfareVises) {
+        const { data, error } = await supabase.rpc("hent_flomgeojson");
+        if (error) {
+          console.error("Feil ved henting av flomfare-data:", error);
+          alert("Kunne ikke hente flomfare-data.");
+          return;
+        }
+
+        flomfareLag = data.map(feature => {
+          return L.geoJSON(feature, {
+            style: {
+              color: farger.flomfare,
+              weight: 2,
+              opacity: 1,
+              fillOpacity: 0.4
+            },
+            onEachFeature: (feature, layer) => {
+              const navn = feature.properties?.navn || "Flomområde";
+              const aktsomhet = feature.properties?.aktsomhetsnivå
+                ? `<br>Aktsomhet: ${feature.properties.aktsomhetsnivå}`
+                : "";
+              layer.bindPopup(`<strong>${navn}</strong>${aktsomhet}`);
+            }
+          }).addTo(map);
+        });
+
+        btn.textContent = "Skjul flomfare";
+        flomfareVises = true;
+      } else {
+        flomfareLag.forEach(layer => map.removeLayer(layer));
+        flomfareLag = [];
+        flomfareVises = false;
+        btn.textContent = "Vis flomfare i Agder";
+      }
+    });
+
+    // Function to calculate the nearest marker
+    function finnNaermesteMarker(brukerPosisjon, markorer) {
+      if (!brukerPosisjon) {
+        alert("Brukerposisjon er ikke tilgjengelig.");
+        return null;
+      }
+
+      let naermesteMarker = null;
+      let kortesteAvstand = Infinity;
+
+      markorer.forEach(marker => {
+        const markerPosisjon = marker.getLatLng();
+        const avstand = brukerPosisjon.distanceTo(markerPosisjon); // Calculate distance
+        if (avstand < kortesteAvstand) {
+          kortesteAvstand = avstand;
+          naermesteMarker = markerPosisjon;
+        }
+      });
+
+      return naermesteMarker;
+    }
+
+    // Event listener for "Nærmeste tilfluktsrom"
+    document.getElementById("naermesteTilfluktsromKnapp").addEventListener("click", () => {
+      const naermeste = finnNaermesteMarker(brukerPosisjon, tilfluktsromMarkorer);
+      if (naermeste) {
+        const googleMapsUrl = `https://www.google.com/maps/dir/${brukerPosisjon.lat},${brukerPosisjon.lng}/${naermeste.lat},${naermeste.lng}`;
+        window.open(googleMapsUrl, "_blank");
+      }
+    });
+
+    // Event listener for "Nærmeste nødhavn"
+    document.getElementById("naermesteNodhavnKnapp").addEventListener("click", () => {
+      const naermeste = finnNaermesteMarker(brukerPosisjon, nodhavnMarkorer);
+      if (naermeste) {
+        const googleMapsUrl = `https://www.google.com/maps/dir/${brukerPosisjon.lat},${brukerPosisjon.lng}/${naermeste.lat},${naermeste.lng}`;
+        window.open(googleMapsUrl, "_blank");
+      }
+    });
+  </script>
 </body>
 </html>
