@@ -1,4 +1,4 @@
-/* Base styles that apply to both modes */
+/* Base Styles */
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
@@ -8,47 +8,63 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Container Styling */
 .container {
     display: flex;
     flex: 1;
-    width: 100%;
-    max-width: 1600px;
+    width: 100%; /* Sørg for at containeren tar hele bredden */
+    max-width: 1800px; /* Øk maksbredden for å gjøre den bredere */
     margin: 0 auto;
     padding: 1rem;
-    gap: 6rem;
+    gap: 2rem; /* Juster gap mellom seksjonene */
     box-sizing: border-box;
+    align-items: stretch; /* Sørg for at barna strekker seg til samme høyde */
+    margin-top: 70px; /* Juster basert på navbarens høyde */
 }
 
+/* Left Section (Map) */
 .left-section {
-    flex: 2;
+    flex: 2; /* Gjør venstre seksjon (kartet) til 2/3 av bredden */
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
+/* Right Section */
 .right-section {
-    flex: 1; /* Reduce the width of the right section */
+    flex: 1; /* Gjør høyre seksjon til 1/3 av bredden */
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Keep some spacing between elements */
-    justify-content: flex-start; /* Align content to the top */
-    margin-top: 16rem; /* Keep the current margin */
-    margin-right: 10%;
+    gap: 1rem;
+    justify-content: flex-start; /* Juster innholdet til toppen */
+    height: 600px; /* Sørg for at høyden matcher kartet */
+    padding-bottom: 10px; /* Legg til ekstra plass nederst */
 }
 
+/* Map Styling */
 #map {
-    width: 100%;
-    height: 800px;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    margin-bottom: 1rem;
+    position: relative;
+    width: 100%; /* Kartet fyller hele bredden av venstre seksjon */
+    height: 600px; /* Sørg for at kartet har en høyde */
+    border-radius: 10px; /* Valgfritt: Avrundede hjørner */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Valgfritt: Subtil skygge */
+    margin: 0;
 }
 
+/* Kontroller (Buttons) */
 .kontroller {
     display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column; /* Legg knappene over hverandre */
+    gap: 0.75rem; /* Avstand mellom knappene */
+    justify-content: flex-start; /* Juster knappene til toppen */
+    align-items: center; /* Sentrer knappene horisontalt */
+    flex: 1; /* Sørg for at kontroller fyller høyden */
+    margin-bottom: 72px; /* Legg til ekstra plass under knappene */
+}
+
+.kontroller::after {
+    content: ""; /* Legg til en tom blokk */
+    flex-grow: 1; /* Skyv knappene oppover */
 }
 
 .kontroller p {
@@ -59,22 +75,47 @@ body {
     width: 100%;
 }
 
+/* Generell styling for alle knapper i .kontroller */
 .kontroller button {
-    padding: 0.6rem 1.2rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
-    background-color: #ffffff; /* Default button background */
-    color: #333; /* Default button text color */
+    background-color: #E0E0E0; /* Lys grå bakgrunn */
+    color: #333333; /* Mørk tekst */
+    border: none; /* Fjern kantlinje */
+    padding: 10px; /* Innvendig padding */
+    width: 400px; /* Fast bredde for alle knapper */
+    height: 50px; /* Fast høyde for alle knapper */
+    text-align: center; /* Sentrer tekst */
+    font-size: 1rem; /* Standard tekststørrelse */
+    border-radius: 5px; /* Avrundede hjørner */
+    display: flex; /* Flexbox for innhold */
+    flex-direction: column; /* Vertikal layout */
+    justify-content: center; /* Sentrer innhold vertikalt */
+    align-items: center; /* Sentrer innhold horisontalt */
+    cursor: pointer; /* Håndpeker ved hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtil skygge */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Myk overgang */
 }
 
 .kontroller button:hover {
-    background-color: #1e90ff; /* Hover background color */
-    color: white; /* Hover text color */
-    border-color: #1e90ff; /* Hover border color */
+    background-color: #B0B0B0; /* Mørkere grå ved hover */
+    color: #333333; /* Mørk tekst ved hover */
+}
+
+.kontroller button:active {
+    background-color: #A0A0A0; /* Enda mørkere grå ved klikk */
+}
+
+.kontroller button:disabled {
+    background-color: #CCCCCC; /* Lys grå bakgrunn for deaktivert knapp */
+    color: #666666; /* Mørkere grå tekst for deaktivert knapp */
+    cursor: not-allowed; /* Endre musepekeren til "ikke tillatt" */
+    box-shadow: none; /* Fjern skygge for deaktivert knapp */
+}
+
+.kontroller button span {
+    font-size: 0.8rem; /* Mindre skrift for span */
+    color: #666666; /* Mørkere grå tekst for beskrivelse */
+    margin-top: 5px; /* Litt avstand fra hovedteksten */
+    text-align: center; /* Sentrer teksten */
 }
 
 .map-info {
@@ -90,58 +131,122 @@ body {
     line-height: 1; /* Reduce line height for compact text */
 }
 
+/* Title styling */
 .title-container {
-    width: 100%;
-    text-align: center;
-    padding: 0.5rem 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Plasser tittelen absolutt */
+    top: 20px; /* Avstand fra toppen */
+    left: 20px; /* Plasser tittelen i venstre hjørne */
+    font-size: 1.5rem; /* Størrelse på tittelen */
+    font-weight: bold; /* Gjør teksten fet */
+    color: #0056b3; /* Mørkere blå tekst */
+    background-color: #ffffff; /* Bakgrunnsfarge */
+    padding: 10px 15px; /* Innvendig padding */
+    border-radius: 5px; /* Avrundede hjørner */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Lett skygge */
+    z-index: 1000; /* Sørg for at tittelen alltid er øverst */
+    text-align: center; /* Sentrer teksten */
 }
 
+/* Footer */
 .footer {
     text-align: center;
     font-size: 0.9rem;
     padding: 10px 0;
-    border-top: 1px solid;
+    border-top: 1px solid #ccc;
     width: 100%;
     box-sizing: border-box;
+    background-color: #f1f1f1; /* Lys grå bakgrunn */
+    color: #333; /* Mørk tekst */
+}
+
+/* Navigation Bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Sørg for at navbaren fyller hele bredden av skjermen */
+    background-color: #0056b3; /* Mørkere blå bakgrunn */
+    color: white; /* Hvit tekst */
+    display: flex;
+    justify-content: space-between; /* Space mellom logo og lenker */
+    align-items: center;
+    padding: 10px 20px; /* Innvendig padding */
+    box-sizing: border-box; /* Inkluder padding i bredden */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtil skygge */
+    z-index: 1000; /* Sørg for at navbaren alltid er øverst */
+}
+
+/* Navbar Logo */
+.navbar-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Navbar Links */
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem; /* Avstand mellom lenkene */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    display: inline;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: white; /* Hvit tekst */
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+    color: #d1e7ff; /* Lysere blå ved hover */
 }
 
 /* Light Mode */
 @media (prefers-color-scheme: light) {
     body {
-        background-color: #f9f9f9;
-        color: #333;
-    }
-
-    .title-container {
-        background-color: #1e90ff;
-        color: white;
+        background-color: #ffffff; /* Hvit bakgrunn */
+        color: #333333; /* Mørk grå tekst for generell innhold */
     }
 
     .kontroller button {
-        background-color: #ffffff;
-        color: #333;
-        border-color: #ccc;
+        background-color: #ffffff; /* Hvit bakgrunn for knappene */
+        color: #000000; /* Svart tekst for hovedinnhold */
+        border: 1px solid #cccccc; /* Lys grå kantlinje */
     }
 
     .kontroller button:hover {
-        background-color: #1e90ff;
-        color: white;
-        border-color: #1e90ff;
+        background-color: #f5f5f5; /* Lysere grå bakgrunn ved hover */
+        color: #000000; /* Svart tekst ved hover */
+    }
+
+    .kontroller button:active {
+        background-color: #eaeaea; /* Litt mørkere grå ved klikk */
+    }
+
+    .kontroller button span {
+        color: #666666; /* Mørk grå tekst for liten skrift */
+    }
+
+    .title-container {
+        background-color: #ffffff; /* Hvit bakgrunn for tittelen */
+        color: #000000; /* Svart tekst for tittelen */
     }
 
     .map-info {
-        background-color: #ffffff;
-        color: #333;
-        border: 1px solid #e0e0e0;
+        background-color: #ffffff; /* Hvit bakgrunn for kartinfo */
+        color: #333333; /* Mørk grå tekst for kartinfo */
+        border: 1px solid #e0e0e0; /* Lys grå kantlinje */
     }
 
     .footer {
-        background-color: #f1f1f1;
-        color: #777;
-        border-top-color: #ccc;
+        background-color: #ffffff; /* Hvit bakgrunn for footer */
+        color: #333333; /* Mørk grå tekst for footer */
+        border-top-color: #cccccc; /* Lys grå kantlinje */
     }
 }
 
@@ -153,20 +258,21 @@ body {
     }
 
     .title-container {
-        background-color: #333a44; /* Darker blue for dark mode */
+        background-color: #003f7f; /* Enda mørkere blå for dark mode */
         color: #ffffff;
     }
 
     .kontroller button {
-        background-color: #333333;
-        color: #ffffff;
-        border-color: #555;
+        background-color: #444444; /* Mørk grå for mørk modus */
+        color: #FFFFFF; /* Hvit tekst */
     }
 
     .kontroller button:hover {
-        background-color: #4073a5;
-        color: white;
-        border-color: #4073a5;
+        background-color: #555555; /* Lysere grå ved hover i mørk modus */
+    }
+
+    .kontroller button span {
+        color: #AAAAAA; /* Lysere grå tekst for beskrivelse i mørk modus */
     }
 
     .map-info {
@@ -176,8 +282,8 @@ body {
     }
 
     .footer {
-        background-color: #1e1e1e;
-        color: #aaaaaa;
+        background-color: gray; /* Enda mørkere blå bakgrunn */
+        color: #ffffff;
         border-top-color: #333;
     }
 
@@ -186,3 +292,139 @@ body {
         filter: brightness(0.8) contrast(1.2) saturate(0.8);
     }
 }
+
+/* Usage Guide Styling */
+.usage-guide {
+    background-color: #333333; /* Mørk grå bakgrunn */
+    color: #ffffff; /* Hvit tekst */
+    padding: 10px;
+    border-radius: 8px; /* Avrundede hjørner */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Mørk skygge */
+    margin: 10px auto;
+    max-width: 600px; /* Gjør boksen smalere */
+    height: 50px; /* Gjør boksen lavere */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; /* Indikerer at boksen er klikkbar */
+    font-size: 0.9rem; /* Mindre tekst */
+}
+
+.usage-guide h2 {
+    font-size: 1.2rem; /* Mindre overskrift */
+    color: #f1f1f1; /* Lysere hvit for overskriften */
+    text-align: center;
+}
+
+/* Info Box Styling */
+.info-box {
+    background-color: #ffffff; /* Hvit bakgrunn */
+    color: #000000; /* Svart tekst */
+    padding: 20px;
+    border-radius: 10px; /* Avrundede hjørner */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Lysere skygge */
+    margin: 100px auto 20px auto; /* Øk toppmargin for mer avstand fra navbar */
+    max-width: 1000px; /* Begrens bredden */
+    height: auto; /* Dynamisk høyde basert på innhold */
+    line-height: 1.6;
+    font-size: 1rem; /* Standard tekststørrelse */
+}
+
+.info-box h2 {
+    font-size: 1.5rem; /* Overskriftstørrelse */
+    color: #333333; /* Mørkere grå for overskriften */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.info-box h4 {
+    font-size: 1.2rem; /* Underoverskriftstørrelse */
+    color: #333333; /* Mørkere grå for underoverskriften */
+    margin-top: 20px;
+}
+
+.info-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.info-box ul li {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #000000; /* Svart tekst for listeelementer */
+}
+
+/* Styling for the map button */
+.map-button {
+    position: absolute; /* Absolutt posisjonering i forhold til kartet */
+    bottom: 20px; /* Plasser knappen 20px fra bunnen */
+    left: 50%; /* Plasser knappen i midten horisontalt */
+    transform: translateX(-50%); /* Juster for å sentrere knappen */
+    background-color: #0056b3; /* Blå bakgrunn */
+    color: white; /* Hvit tekst */
+    border: none; /* Fjern kantlinje */
+    padding: 10px 20px; /* Innvendig padding */
+    border-radius: 5px; /* Avrundede hjørner */
+    cursor: pointer; /* Endre musepekeren til en hånd */
+    font-size: 1rem; /* Standard tekststørrelse */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtil skygge */
+    z-index: 1000; /* Sørg for at knappen er foran kartet */
+}
+
+.map-button:hover {
+    background-color: #003f7f; /* Mørkere blå ved hover */
+}
+.map-button:active {
+    background-color: #002f5b; /* Enda mørkere blå ved klikk */
+}
+.map-button:focus {
+    outline: none; /* Fjern fokusramme */
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.5); /* Legg til en fokusramme */
+}
+.map-button:disabled {
+    background-color: #ccc; /* Grå bakgrunn for deaktivert knapp */
+    color: #666; /* Grå tekst for deaktivert knapp */
+    cursor: not-allowed; /* Endre musepekeren til en "ikke tillatt" hånd */
+    box-shadow: none; /* Fjern skygge for deaktivert knapp */
+}
+.map-button:disabled:hover {
+    background-color: #ccc; /* Ingen endring ved hover for deaktivert knapp */
+}
+.map-button:disabled:active {
+    background-color: #ccc; /* Ingen endring ved klikk for deaktivert knapp */
+}
+.map-button:disabled:focus {
+    outline: none; /* Fjern fokusramme for deaktivert knapp */
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Endre retning til kolonne for mindre skjermer */
+        padding: 0.5rem; /* Reduser padding */
+    }
+
+    .left-section, .right-section {
+        flex: 1; /* Begge seksjoner tar lik plass */
+        width: 100%; /* Fyller hele bredden */
+    }
+
+    #map {
+        height: 400px; /* Reduser høyden på kartet for mindre skjermer */
+    }
+
+    .navbar {
+        flex-direction: column; /* Endre retning til kolonne for navbar */
+        align-items: flex-start; /* Juster innholdet til venstre */
+        padding: 10px; /* Reduser padding */
+    }
+
+    .navbar-links {
+        margin-left: 0; /* Fjern venstre margin for mindre skjermer */
+        gap: 1rem; /* Øk avstanden mellom lenkene */
+    }
+}
+/* End of CSS */
+/* Add any additional styles below */
+/* Custom styles for specific elements can be added here */
+/* Example: Custom styles for a specific class */

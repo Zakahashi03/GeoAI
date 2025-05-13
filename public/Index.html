@@ -1,65 +1,80 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leaflet Kart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gruppe 11 Kart</title> <!-- Endret fra GeoAI til Gruppe 11 -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="gisstyle.css" />
+  <link rel="stylesheet" href="gisstyle.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="app.js"></script>
 </head>
 <body>
-  <!-- Title Section -->
-  <div class="title-container">
-    <h1>Leaflet Kart</h1>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-logo">Gruppe 11</div> <!-- Endret fra GeoAI til Gruppe 11 -->
+    <ul class="navbar-links">
+      <li><a href="#map">Kart</a></li>
+      <li><a href="#about">Om</a></li>
+    </ul>
+  </nav>
+
+
+  <div class="info-box" id="info-box">
+    <h2>Hvordan bruke kartet?</h2>
+    <p>
+      Dette interaktive kartet gir deg tilgang til viktige data i Agder-regionen. Du kan vise og skjule datasett som tilfluktsrom, nødhavner og flomfareområder ved hjelp av knappene til venstre.
+    </p>
+    <h4>Markørfarger</h4>
+    <ul>
+      <li><strong style="color: blue;">Blå:</strong> Tilfluktsrom</li>
+      <li><strong style="color: green;">Grønn:</strong> Nødhavn</li>
+      <li><strong style="color: orange;">Oransj:</strong> Flomfareområder</li>
+      <li><strong style="color: red;">Rød:</strong> Din nåværende posisjon</li>
+    </ul>
   </div>
+  
 
   <div class="container">
     <!-- Left Section -->
     <div class="left-section">
-      <div class="kontroller">
-        <p>Trykk på datasettene du vil vise/skjule</p>
-        <button id="tilfluktsromKnapp">Vis tilfluktsrom</button>
-        <button id="nodhavnKnapp">Vis nødhavn</button>
-        <button id="flomfareKnapp">Vis flomfare i Agder</button>
-
-        <!-- New Section for Snarveier -->
-        <p>Snarveier</p>
-        <button id="naermesteTilfluktsromKnapp">Nærmeste tilfluktsrom</button>
-        <button id="naermesteNodhavnKnapp">Nærmeste nødhavn</button>
+      <div id="map">
       </div>
-
-      <div id="map"></div>
     </div>
 
     <!-- Right Section -->
     <div class="right-section">
       <div class="map-info">
-        <h3>Om Kartet</h3>
-        <p>
-          Dette interaktive kartet gir deg tilgang til viktige data i Agder-regionen. Du kan vise og skjule datasett som tilfluktsrom, nødhavner og flomfareområder ved hjelp av knappene til venstre. 
-          Markørene på kartet har følgende farger:
-          <ul>
-            <li><strong>Blå:</strong> Tilfluktsrom</li>
-            <li><strong>Grønn:</strong> Nødhavn</li>
-            <li><strong>Oransj:</strong> Flomfareområder</li>
-            <li><strong>Rød:</strong> Din nåværende posisjon</li>
-          </ul>
-          De to nederste knappene, "Nærmeste tilfluktsrom" fører deg til nærmeste tilfluktsrom og "Nærmeste nødhavn", fører deg til nærmeste nødhavn fra din posisjon i Google Maps. For at disse knappene skal fungere, må de tilhørende markørene være synlige på kartet.
-        </p>
-        <h3>Kreditering</h3>
-        <p>
-          Kartdata er levert av OpenStreetMap og Supabase. Utviklingen av denne applikasjonen er et samarbeid mellom Mahsa, Zakariyaa, Clovis, Yousef, Kansika og Tahir. For spørsmål eller tilbakemeldinger, vennligst ta kontakt med oss. Vi setter pris på din tilbakemelding!
-        </p>
+        <h3 id="about">Om Kartet</h3>
+        <div class="kontroller" id="omKartet">
+          <p>Trykk på datasettene du vil vise/skjule</p>
+          <button id="tilfluktsromKnapp">
+            Vis tilfluktsrom
+            <span>Klikk for å vise/skjule tilfluktsrom i Agder</span>
+          </button>
+          <button id="nodhavnKnapp">
+            Vis nødhavn
+            <span>Klikk for å vise/skjule nødhavn i Agder</span>
+          </button>
+          <button id="flomfareKnapp">
+            Vis flomfare
+            <span>Klikk for å vise/skjule flomskred i Agder</span>
+          </button>
+          <p>Snarveier</p>
+          <button id="naermesteTilfluktsromKnapp">
+            Nærmeste tilfluktsrom
+            <span>Klikk for å finne nærmeste tilfluktsrom fra din posisjon</span>
+          </button>
+          <button id="naermesteNodhavnKnapp">
+            Nærmeste nødhavn
+            <span>Klikk for å finne nærmeste nødhavn fra din posisjon</span>
+          </button>
+        </div>
+  
       </div>
     </div>
   </div>
 
-  <div class="footer">
-    <p>&copy; 2023 Kartapplikasjon. Alle rettigheter reservert.</p>
-    <p>Utviklet av Mahsa, Zakariyaa, Clovis, Yousef, Kansika og Tahir</p>
-  </div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module">
     import { createClient } from 'https://esm.sh/@supabase/supabase-js';
 
@@ -116,7 +131,7 @@
       let vises = false;
 
       document.getElementById(knappId).addEventListener('click', async () => {
-        const btn = document.getElementById(knappId);
+        const knapp = document.getElementById(knappId);
 
         if (!vises) {
           const { data, error } = await supabase.from(tabellnavn).select("*");
@@ -148,12 +163,15 @@
             lagring.push(marker);
           });
 
-          btn.textContent = `Skjul ${tabellnavn}`;
+          // Oppdater knappetekst
+          knapp.childNodes[0].textContent = knapp.childNodes[0].textContent.replace("Vis", "Skjul");
           vises = true;
         } else {
           lagring.forEach(m => map.removeLayer(m));
           lagring.length = 0;
-          btn.textContent = `Vis ${tabellnavn}`;
+
+          // Oppdater knappetekst
+          knapp.childNodes[0].textContent = knapp.childNodes[0].textContent.replace("Skjul", "Vis");
           vises = false;
         }
       });
@@ -183,7 +201,7 @@
     let flomfareLag = [];
 
     document.getElementById("flomfareKnapp").addEventListener("click", async () => {
-      const btn = document.getElementById("flomfareKnapp");
+      const knapp = document.getElementById("flomfareKnapp");
 
       if (!flomfareVises) {
         const { data, error } = await supabase.rpc("hent_flomgeojson");
@@ -211,13 +229,14 @@
           }).addTo(map);
         });
 
-        btn.textContent = "Skjul flomfare";
+        knapp.innerHTML = `Skjul flomfare<span> Klikk for å skjule flomfareområdene i Agder</span>`;
         flomfareVises = true;
       } else {
         flomfareLag.forEach(layer => map.removeLayer(layer));
         flomfareLag = [];
+
+        knapp.innerHTML = `Vis flomfare<span> Klikk for å vise flomfareområdene i Agder</span>`;
         flomfareVises = false;
-        btn.textContent = "Vis flomfare i Agder";
       }
     });
 
@@ -261,5 +280,12 @@
       }
     });
   </script>
+
+
+  <div class="footer">
+    <p id="contact">Kontakt oss på E-post for mer informasjon!</p>
+    <p>Utviklet av Mahsa, Zakariyaa, Clovis, Yousef, Kansika og Tahir</p>
+  </div>
+  
 </body>
 </html>
