@@ -53,13 +53,14 @@ body {
 
 /* Kontroller (Buttons) */
 .kontroller {
-    display: flex;
-    flex-direction: column; /* Legg knappene over hverandre */
-    gap: 0.75rem; /* Avstand mellom knappene */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
     justify-content: flex-start; /* Juster knappene til toppen */
     align-items: center; /* Sentrer knappene horisontalt */
     flex: 1; /* Sørg for at kontroller fyller høyden */
     margin-bottom: 72px; /* Legg til ekstra plass under knappene */
+    position: static; /* Standard posisjonering */
 }
 
 .kontroller::after {
@@ -84,7 +85,7 @@ body {
     width: 400px; /* Fast bredde for alle knapper */
     height: 50px; /* Fast høyde for alle knapper */
     text-align: center; /* Sentrer tekst */
-    font-size: 1rem; /* Standard tekststørrelse */
+    font-size: 16px; /* Standard tekststørrelse */
     border-radius: 5px; /* Avrundede hjørner */
     display: flex; /* Flexbox for innhold */
     flex-direction: column; /* Vertikal layout */
@@ -397,6 +398,24 @@ body {
 .map-button:disabled:focus {
     outline: none; /* Fjern fokusramme for deaktivert knapp */
 }
+
+/* Sørg for at elementene vises i riktig rekkefølge */
+.kontroller {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Avstand mellom elementene */
+}
+
+.snarvei {
+  margin-top: 10px;
+}
+
+.kontroller button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
