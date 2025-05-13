@@ -7,9 +7,9 @@ const supabase = createClient(
 );
 
 // Opprett kart
-const map = L.map('map').setView([60.472, 8.4689], 5);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
+const map = L.map("map").setView([58.14671, 7.99570], 8); // Sentrum i Agder
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap contributors"
 }).addTo(map);
 
 // Farger for markører
@@ -62,29 +62,47 @@ function opprettLagToggler({ knappId, tabellnavn, popupFelt, farge, lagring }) {
         const knapp = document.getElementById(knappId);
 
         if (!vises) {
+            // Hent data fra Supabase
             const { data, error } = await supabase.from(tabellnavn).select("*");
             if (error) {
                 console.error(`Feil ved henting av ${tabellnavn}:`, error);
                 return;
             }
 
-            lagring.length = 0;
+            // Legg til markører for laget
             data.filter(p => p.latitude && p.longitude).forEach(p => {
-                const popupTekst = p[popupFelt] || `Ukjent ${popupFelt}`;
                 const marker = L.marker([p.latitude, p.longitude], { icon: lagIkon(farge) })
                     .addTo(map)
-                    .bindPopup(popupTekst);
+                    .bindPopup(`${p[popupFelt] || "Ukjent"}<br>${p.adresse || ""}`);
 
-                marker.on("click", () => åpneGoogleMaps(p.latitude, p.longitude));
+                // Legg til klikkhendelse for å åpne Google Maps med veibeskrivelse
+                marker.on("click", () => {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition((pos) => {
+                            const userLat = pos.coords.latitude;
+                            const userLng = pos.coords.longitude;
+                            const googleMapsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${p.latitude},${p.longitude}`;
+                            window.open(googleMapsUrl, "_blank");
+                        }, () => {
+                            alert("Kunne ikke hente din posisjon.");
+                        });
+                    } else {
+                        alert("Geolokasjon støttes ikke av nettleseren din.");
+                    }
+                });
+
                 lagring.push(marker);
             });
 
+            // Oppdater knappeteksten
             knapp.childNodes[0].textContent = knapp.childNodes[0].textContent.replace("Vis", "Skjul");
             vises = true;
         } else {
-            lagring.forEach(m => map.removeLayer(m));
+            // Fjern markørene fra kartet
+            lagring.forEach(marker => map.removeLayer(marker));
             lagring.length = 0;
 
+            // Oppdater knappeteksten
             knapp.childNodes[0].textContent = knapp.childNodes[0].textContent.replace("Skjul", "Vis");
             vises = false;
         }
@@ -179,22 +197,22 @@ document.addEventListener("DOMContentLoaded", () => {
     opprettLagToggler({
         knappId: "tilfluktsromKnapp",
         tabellnavn: "tilfluktsrom",
-        popupFelt: "adresse",
-        farge: farger.tilfluktsrom,
+        popupFelt: "navn",
+        farge: "blue",
         lagring: tilfluktsromMarkorer
     });
     opprettLagToggler({
         knappId: "nodhavnKnapp",
         tabellnavn: "nodhavn",
         popupFelt: "navn",
-        farge: farger.nodhavn,
+        farge: "green",
         lagring: nodhavnMarkorer
     });
     opprettLagToggler({
         knappId: "politistasjonKnapp",
-        tabellnavn: "politistasjon",
+        tabellnavn: "politistasjoner",
         popupFelt: "navn",
-        farge: farger.politistasjon,
+        farge: "orange",
         lagring: politistasjonMarkorer
     });
     leggTilNaermesteKnapp("naermesteTilfluktsromKnapp", tilfluktsromMarkorer);
