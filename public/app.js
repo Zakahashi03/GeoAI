@@ -72,26 +72,52 @@ function opprettLagToggler({ knappId, tabellnavn, popupFelt, farge, lagring }) {
             // Legg til markører for laget
             data.filter(p => p.latitude && p.longitude).forEach(p => {
                 const marker = L.marker([p.latitude, p.longitude], { icon: lagIkon(farge) })
-                    .addTo(map)
-                    .bindPopup(`${p[popupFelt] || "Ukjent"}<br>${p.adresse || ""}`);
+                    .addTo(map);
 
-                // Legg til klikkhendelse for å åpne Google Maps med veibeskrivelse
-                marker.on("click", () => {
+                marker.on('click', function() {
+                    let win = window.open('', '_blank'); // Open immediately to avoid popup block
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition((pos) => {
                             const userLat = pos.coords.latitude;
                             const userLng = pos.coords.longitude;
-                            const googleMapsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${p.latitude},${p.longitude}`;
-                            window.open(googleMapsUrl, "_blank");
+                            const destLat = p.latitude;
+                            const destLng = p.longitude;
+                            const googleMapsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${destLat},${destLng}`;
+                            win.location = googleMapsUrl;
                         }, () => {
+                            win.close();
                             alert("Kunne ikke hente din posisjon.");
                         });
                     } else {
+                        win.close();
                         alert("Geolokasjon støttes ikke av nettleseren din.");
                     }
                 });
 
                 lagring.push(marker);
+            });
+
+            // Etter at alle markører er lagt til, legg til event listener for popup-knappene:
+            map.on("popupopen", function(e) {
+                const btn = e.popup._contentNode.querySelector(".veibeskrivelse-btn");
+                if (btn) {
+                    btn.addEventListener("click", function() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition((pos) => {
+                                const userLat = pos.coords.latitude;
+                                const userLng = pos.coords.longitude;
+                                const destLat = btn.getAttribute("data-lat");
+                                const destLng = btn.getAttribute("data-lng");
+                                const googleMapsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${destLat},${destLng}`;
+                                window.open(googleMapsUrl, "_blank");
+                            }, () => {
+                                alert("Kunne ikke hente din posisjon.");
+                            });
+                        } else {
+                            alert("Geolokasjon støttes ikke av nettleseren din.");
+                        }
+                    });
+                }
             });
 
             // Oppdater knappeteksten
