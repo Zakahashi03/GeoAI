@@ -257,6 +257,9 @@ body {
     .info-box h2, .info-box h4, .info-box ul li {
         color: #000000;
     }
+    .info-box h2 {
+        text-align: center;
+    }
 }
 
 /* Dark Mode */
@@ -378,6 +381,9 @@ body {
     }
     .info-box h2, .info-box h4, .info-box ul li {
         color: #000000;
+    }
+    .info-box h2 {
+        text-align: center;
     }
 }
 
