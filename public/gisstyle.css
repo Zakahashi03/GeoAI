@@ -249,6 +249,14 @@ body {
         color: #333333; /* Mørk grå tekst for footer */
         border-top-color: #cccccc; /* Lys grå kantlinje */
     }
+
+    .info-box {
+        background-color: #ffffff; /* Hvit bakgrunn */
+        color: #000000;            /* Svart tekst */
+    }
+    .info-box h2, .info-box h4, .info-box ul li {
+        color: #000000;
+    }
 }
 
 /* Dark Mode */
@@ -292,55 +300,21 @@ body {
     #map {
         filter: brightness(0.8) contrast(1.2) saturate(0.8);
     }
-}
 
-/* Usage Guide Styling */
-.usage-guide {
-    background-color: #333333; /* Mørk grå bakgrunn */
-    color: #ffffff; /* Hvit tekst */
-    padding: 10px;
-    border-radius: 8px; /* Avrundede hjørner */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Mørk skygge */
-    margin: 10px auto;
-    max-width: 600px; /* Gjør boksen smalere */
-    height: 50px; /* Gjør boksen lavere */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer; /* Indikerer at boksen er klikkbar */
-    font-size: 0.9rem; /* Mindre tekst */
-}
-
-.usage-guide h2 {
-    font-size: 1.2rem; /* Mindre overskrift */
-    color: #f1f1f1; /* Lysere hvit for overskriften */
-    text-align: center;
-}
-
-/* Info Box Styling */
-.info-box {
-    background-color: #ffffff; /* Hvit bakgrunn */
-    color: #000000; /* Svart tekst */
-    padding: 20px;
-    border-radius: 10px; /* Avrundede hjørner */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Lysere skygge */
-    margin: 100px auto 20px auto; /* Øk toppmargin for mer avstand fra navbar */
-    max-width: 1000px; /* Begrens bredden */
-    height: auto; /* Dynamisk høyde basert på innhold */
-    line-height: 1.6;
-    font-size: 1rem; /* Standard tekststørrelse */
-}
-
-.info-box h2 {
+    .usage-guide {
+        background-color: #222222; /* Mørk grå bakgrunn */
+        color: #ffffff;            /* Hvit tekst */
+    }
+    .info-box h2 {
     font-size: 1.5rem; /* Overskriftstørrelse */
-    color: #333333; /* Mørkere grå for overskriften */
+    color: #fffbfb; /* Mørkere grå for overskriften */
     margin-bottom: 10px;
     text-align: center;
 }
 
 .info-box h4 {
     font-size: 1.2rem; /* Underoverskriftstørrelse */
-    color: #333333; /* Mørkere grå for underoverskriften */
+    color: #fffdfd; /* Mørkere grå for underoverskriften */
     margin-top: 20px;
 }
 
@@ -353,7 +327,69 @@ body {
 .info-box ul li {
     margin: 5px 0;
     font-size: 1rem;
-    color: #000000; /* Svart tekst for listeelementer */
+    color: #fff9f9; /* Svart tekst for listeelementer */
+}
+
+    .info-box {
+        background-color: #222222; /* Mørk grå bakgrunn */
+        color: #ffffff;            /* Hvit tekst */
+    }
+    .info-box h2, .info-box h4, .info-box ul li {
+        color: #ffffff;
+    }
+}
+
+/* Info Box Styling */
+.info-box {
+    padding: 20px;
+    border-radius: 10px; /* Avrundede hjørner */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Lysere skygge */
+    margin: 100px auto 20px auto; /* Øk toppmargin for mer avstand fra navbar */
+    max-width: 1000px; /* Begrens bredden */
+    height: auto; /* Dynamisk høyde basert på innhold */
+    line-height: 1.6;
+    font-size: 1rem; /* Standard tekststørrelse */
+}
+
+/* Fjern disse globale fargene!
+.info-box h2 {
+    font-size: 1.5rem;
+    color: #333333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.info-box h4 {
+    font-size: 1.2rem;
+    color: #000000;
+    margin-top: 20px;
+}
+.info-box ul li {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #000000;
+}
+*/
+
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+    .info-box {
+        background-color: #ffffff;
+        color: #000000;
+    }
+    .info-box h2, .info-box h4, .info-box ul li {
+        color: #000000;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .info-box {
+        background-color: #222222;
+        color: #ffffff;
+    }
+    .info-box h2, .info-box h4, .info-box ul li {
+        color: #ffffff;
+    }
 }
 
 /* Styling for the map button */
